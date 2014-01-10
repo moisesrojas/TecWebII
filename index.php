@@ -24,7 +24,7 @@
 	   $height = $width/$ratio_orig;
 	}
 
-	// Define la imagen la imagen
+	// Define la imagen y sus características
 	$image_p = imagecreatetruecolor($width, $height);
 	imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 
