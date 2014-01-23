@@ -16,17 +16,19 @@ $query_albums = mysql_query('SELECT * FROM albums')
 	<?php include_once("includes/menu.php"); ?>
 	<table class="admin_contenido">
 		<tr>
-			<th>id</th>
+		<th>id</th>
 		<td>titulo</td>
 		<td>fecha de lanzamiento</td>
 		<td>cover</td>
+		<td>Eliminar</td>
 	</tr>
 	<?php while ($row = mysql_fetch_array($query_albums)){
 		echo "<tr>";
 		echo "<td>". $row['id']. "</td>";
-	echo "<td>". $row['titulo']. "</td>";
+	echo "<td><a href='editar_album.php?id=".$row['id']."'>". $row['titulo']. "</a></td>";
 	echo "<td>". $row['fecha_lanzamiento']. "</td>";
 	echo "<td><img width='50' src='../images/covers/thumbs/". $row['cover']. "'></td>";
+	echo "<td><a href='includes/eliminar_album.php?id=".$row['id']."'>Eliminar</a></td>";
 	echo "</tr>";
 } ?>
 	</table>
