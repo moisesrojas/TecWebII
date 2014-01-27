@@ -18,12 +18,15 @@ $titulo_pagina = "Crear Albums - Administrador";
 	
 	<?php include_once("includes/menu.php"); ?>
 	
-	<form action="includes/insertar_album.php" method="POST">
+	<form action="includes/insertar_album.php" method="POST" enctype="multipart/form-data">
 		<span>Titulo:</span>
 		<input type="text" name="titulo">
 		<br><br>
 		<span>Fecha de lanzamiento:</span>
 		<input type="text" name="fecha_lanzamiento">
+		<br><br>
+		<span>Cover:</span>
+		<input type="file" name="cover">
 		<p><input type="submit" value="Agregar"></p>
 	</form>
 	
