@@ -19,6 +19,7 @@ $query_albums = mysql_query('SELECT * FROM albums')
 		<th>id</th>
 		<td>titulo</td>
 		<td>fecha de lanzamiento</td>
+		<td>Género</td>
 		<td>cover</td>
 		<td>Eliminar</td>
 	</tr>
@@ -27,6 +28,15 @@ $query_albums = mysql_query('SELECT * FROM albums')
 		echo "<td>". $row['id']. "</td>";
 	echo "<td><a href='editar_album.php?id=".$row['id']."'>". $row['titulo']. "</a></td>";
 	echo "<td>". $row['fecha_lanzamiento']. "</td>";
+	echo "<td>";
+	$id_album = $row['id'];
+	$query_genero = mysql_query("SELECT generos.id, generos.nombre FROM generos
+		INNER JOIN relacion_album_genero ON generos.id=relacion_album_genero.id_genero
+		WHERE relacion_album_genero.id_album = '$id_album'");
+		while($row2 = mysql_fetch_array($query_genero)){
+			echo $row2['nombre'] . "<br>";
+		}
+	echo "</td>";
 	echo "<td><img width='50' src='../images/covers/thumbs/thumb_". $row['cover']. "'></td>";
 	echo "<td><a href='includes/eliminar_album.php?id=".$row['id']."'>Eliminar</a></td>";
 	echo "</tr>";

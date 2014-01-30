@@ -3,6 +3,7 @@ include_once("conexion.php");
 /* Definimos las variables que vamos a insertar en la base de datos */
 $titulo= $_POST['titulo'];
 $fecha= $_POST['fecha_lanzamiento'];
+$genero= $_POST['genero'];
 /* Definimos las variables que manipulan el archivo de imagen */
 $file_name=$_FILES['cover']['name'];
 $file_type=$_FILES['cover']['type'];
@@ -62,5 +63,11 @@ echo $file_tmp . "<br>";
 	/* Insertamos en la base de datos */
 mysql_query("INSERT INTO albums (titulo, fecha_lanzamiento, cover)
 			 VALUES ('$titulo', '$fecha', '$file_name_final')");
+
+$id_nuevo_album = mysql_insert_id();
+
+mysql_query("INSERT INTO relacion_album_genero (id_genero,id_album)
+			VALUES ('$genero', '$id_nuevo_album')");
+
 header('Location:../');
 ?>

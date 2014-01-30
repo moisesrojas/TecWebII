@@ -1,5 +1,7 @@
 <?php
-$titulo_pagina = "Crear Albums - Administrador";
+include_once("includes/conexion.php");
+$titulo_pagina = "Crear Album - Administrador";
+$query_generos = mysql_query("SELECT * FROM generos");
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,6 +11,24 @@ $titulo_pagina = "Crear Albums - Administrador";
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title><?php echo $titulo_pagina; ?>
 	</title>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script>
+	$(function() {
+		  $( "#fecha" ).datepicker({
+	  showOn: "both",
+	  buttonText: "Calendario",
+	  dateFormat: "yy-mm-dd",
+	  showOtherMonths: true,
+	  changeMonth: true,
+	  changeYear: true,
+	  yearRange: "1945:2014",
+	  dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+	  monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ]
+	});
+	});
+	  </script>
 </head>
 <body>
 	<div class="header">
@@ -23,7 +43,14 @@ $titulo_pagina = "Crear Albums - Administrador";
 		<input type="text" name="titulo">
 		<br><br>
 		<span>Fecha de lanzamiento:</span>
-		<input type="text" name="fecha_lanzamiento">
+		<input type="text" name="fecha_lanzamiento" id="fecha">
+		<br><br>
+		<span>Género:</span>
+		<select name="genero">
+			<?php while($row=mysql_fetch_array($query_generos)){
+				echo "<option value='".$row['id']."'>".$row['nombre']." </option>";
+			} ?>
+		</select>
 		<br><br>
 		<span>Cover:</span>
 		<input type="file" name="cover">
