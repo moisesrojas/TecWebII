@@ -17,16 +17,15 @@ $query_generos = mysql_query("SELECT * FROM generos");
 	<script>
 	$(function() {
 		  $( "#fecha" ).datepicker({
-	  showOn: "both",
-	  buttonText: "Calendario",
-	  dateFormat: "yy-mm-dd",
-	  showOtherMonths: true,
-	  changeMonth: true,
-	  changeYear: true,
-	  yearRange: "1945:2014",
-	  dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-	  monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ]
-	});
+  showOn: "both",
+  buttonText: "Calendario",
+  dateFormat: "yy-mm-dd",
+  dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+  changeMonth: true,
+  changeYear: true,
+  yearRange: "1950:2014",
+  monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ] 
+});
 	});
 	  </script>
 </head>
