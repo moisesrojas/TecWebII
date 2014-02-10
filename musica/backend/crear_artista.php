@@ -11,8 +11,11 @@ $titulo_pagina = "Crear Artista - Administrador";
 	<script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
 	tinymce.init({
-	    selector: "textarea"
-	 });
+    selector: "textarea",
+    plugins: ["advlist autolink lists link image charmap print preview anchor",
+			  "searchreplace visualblocks code fullscreen",
+			  "insertdatetime media table contextmenu paste"]
+});
 	</script>
 </head>
 <body>
