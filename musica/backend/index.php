@@ -1,23 +1,28 @@
 <?php
+//Definimos el número de registros para mostrar
 $limite_registros = 2;
-
+//Definimos la variable de la página
 $pagina = $_GET['pagina'];
+//Si esta definida entonces modificamos el valor de $inicio según el valor de la $pagina
 if(isset($_GET['pagina'])){
 	$inicio = ($pagina - 1) * $limite_registros;
-} else{
+} else {
+//Si no entonces definimos $inicio y $página	
 	$inicio = 0;
 	$pagina = 1;
 }
 
 $titulo_pagina = "Mi Música - Administrador";
 include_once("includes/conexion.php");
-
+//Mostramos sólo aquellos registros del $inicio al $limite_registros
 $query_albums = mysql_query("SELECT * FROM albums LIMIT $inicio, $limite_registros");
 
 
-//
+//hacemos una segunda consulta para saber el total de registros
 $query_totales = mysql_query("SELECT * FROM albums");
+//capturamos en una variable el total de registros en base al query
 $total_registros = mysql_num_rows($query_totales);
+//Definimos el total de paginas en base al total de registros y el limite de registros
 $paginas_totales = ceil($total_registros/$limite_registros);
 
 ?>
@@ -61,10 +66,14 @@ $paginas_totales = ceil($total_registros/$limite_registros);
 } ?>
 	</table>
 	<?php
+	
+	//Hacemos un ciclo for para arrojar los links que pasanla variable $pagina a través de la URL
 	for ($i=1; $i<$paginas_totales+1; $i++){
+		//Si $pagina es igual al elemento del ciclo, entonces solo mostramos el valor
 		if($i == $pagina){
 			echo $i;
-		} else{
+		} else {
+			//Si no, muestro el valor y lo mando al index con un link
 		echo "<a href='?pagina=".$i."'>".$i."</a>";
 		}
 	}
