@@ -1,7 +1,25 @@
 <?php
+$limite_registros = 2;
+
+$pagina = $_GET['pagina'];
+if(isset($_GET['pagina'])){
+	$inicio = ($pagina - 1) * $limite_registros;
+} else{
+	$inicio = 0;
+	$pagina = 1;
+}
+
 $titulo_pagina = "Mi Música - Administrador";
 include_once("includes/conexion.php");
-$query_albums = mysql_query('SELECT * FROM albums')
+
+$query_albums = mysql_query("SELECT * FROM albums LIMIT $inicio, $limite_registros");
+
+
+//
+$query_totales = mysql_query("SELECT * FROM albums");
+$total_registros = mysql_num_rows($query_totales);
+$paginas_totales = ceil($total_registros/$limite_registros);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,5 +60,15 @@ $query_albums = mysql_query('SELECT * FROM albums')
 	echo "</tr>";
 } ?>
 	</table>
+	<?php
+	for ($i=1; $i<$paginas_totales+1; $i++){
+		if($i == $pagina){
+			echo $i;
+		} else{
+		echo "<a href='?pagina=".$i."'>".$i."</a>";
+		}
+	}
+	
+	 ?>
 </body>
 </html>
