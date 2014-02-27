@@ -5,4 +5,4 @@ if (!$conexion){
 }
 $bd = mysql_select_db('Musica', $conexion);
 mysql_set_charset('utf8', $conexion);
-?>m
+?>

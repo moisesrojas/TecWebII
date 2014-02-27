@@ -45,11 +45,11 @@ $query_generos = mysql_query("SELECT * FROM generos");
 		<input type="text" name="fecha_lanzamiento" id="fecha">
 		<br><br>
 		<span>Género:</span>
-		<select name="genero">
+		<br>
 			<?php while($row=mysql_fetch_array($query_generos)){
-				echo "<option value='".$row['id']."'>".$row['nombre']." </option>";
+				echo "<input type='checkbox' name='genero[]' value='".$row['id']."'>".$row['nombre']." </br>";
 			} ?>
-		</select>
+		
 		<br><br>
 		<span>Cover:</span>
 		<input type="file" name="cover">

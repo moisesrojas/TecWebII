@@ -1,0 +1,1 @@
+<h1>Me mandaste un valor por GET: <?php echo $_GET['id']; ?></h1>

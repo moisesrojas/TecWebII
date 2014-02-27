@@ -1,0 +1,1 @@
+<h1>Hola <?php echo $_POST['nombre']; ?></h1>

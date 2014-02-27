@@ -23,8 +23,11 @@ if(in_array($file_type, $tipos_permitidos)){
 	/* Definimos el nombre de nuestro Thumb */
 	$thumb='../../images/covers/thumbs/thumb_' . $file_name_final;
 	/* Definimos la creación de nuestro thumb en formato jpeg a partir del archivo recién subido */
+	if($file_type == 'image/png'){
+	$imagen= imagecreatefrompng("../../images/covers/" . $file_name_final);
+	} else if ($file_type == 'image/jpeg'){
 	$imagen= imagecreatefromjpeg("../../images/covers/" . $file_name_final);
-	
+	}
 	/* Definimos el tamaño de nuestro thumb imagen */
 	$width=300;
 	$height=300;
@@ -65,9 +68,15 @@ mysql_query("INSERT INTO albums (titulo, fecha_lanzamiento, cover)
 			 VALUES ('$titulo', '$fecha', '$file_name_final')");
 
 $id_nuevo_album = mysql_insert_id();
+$total_generos = count($genero)-1;
 
+for($i=0; $i<=$total_generos; $i++){
 mysql_query("INSERT INTO relacion_album_genero (id_genero,id_album)
-			VALUES ('$genero', '$id_nuevo_album')");
+			VALUES ('$genero[$i]', '$id_nuevo_album')");
+}
 
-header('Location:../');
+//echo $total_generos;
+//echo $genero[1/];
+
+//header('Location:../');
 ?>
