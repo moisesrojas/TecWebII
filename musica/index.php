@@ -2,23 +2,31 @@
 $titulo_pagina = "Mi Música";
 include_once("includes/conexion.php");
 $albums_disponibles = mysql_query("SELECT titulo FROM albums GROUP BY titulo");
+$generos_disponibles = mysql_query("SELECT nombre FROM generos GROUP BY nombre");
+
 $arreglo = array();
-$total_resultados =  mysql_num_rows($albums_disponibles);
-if(mysql_num_rows($albums_disponibles)==0){
-	array_push($arreglo, "No hay datos");
-} else{
-	while($row = mysql_fetch_array($albums_disponibles)){
+
+$total_albums =  mysql_num_rows($albums_disponibles);
+$total_generos = mysql_num_rows($generos_disponibles);
+
+$total_resultados = $total_albums + $total_generos;
+
+while($row = mysql_fetch_array($albums_disponibles)){
 		array_push($arreglo, $row['titulo']);
-	}
 }
+
+while($row2 = mysql_fetch_array($generos_disponibles)){
+		array_push($arreglo, $row2['nombre']);
+}
+
 //echo $arreglo[];
 
 for($i = 0;$i < $total_resultados; $i++){
-	if($i == $total_resultados-1){
-      $sugerencias = $sugerencias . "'". $arreglo[$i] . "'";
-	} else{
-	  $sugerencias = $sugerencias . "'". $arreglo[$i] . "',";
-	}
+	if($i < $total_albums){
+	  $sugerencias = $sugerencias . "{ label:'". $arreglo[$i] . "', category:'albums'},";
+	  } else if ($i >= $total_albums && $i < ($total_albums + $total_generos)){
+		  $sugerencias = $sugerencias . "{ label:'". $arreglo[$i] . "', category:'generos'},"; 	
+	  }
 }
 
 //echo $sugerencias;
@@ -53,17 +61,46 @@ $(document).ready(function(){
 	});
 });
 
-$(function() {
-    var availableTags = [
-	<?php echo $sugerencias; ?>
-    ];
-    $( "#titulo" ).autocomplete({
-      source: availableTags
-    });
-  });
-
 
 </script>
+
+	<style>
+	  .ui-autocomplete-category {
+	    font-weight: bold;
+	    padding: .2em .4em;
+	    margin: .8em 0 .2em;
+	    line-height: 1.5;
+	  }
+	  </style>
+	  <script>
+	  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+	    _renderMenu: function( ul, items ) {
+	      var that = this,
+	        currentCategory = "";
+	      $.each( items, function( index, item ) {
+	        if ( item.category != currentCategory ) {
+	          ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+	          currentCategory = item.category;
+	        }
+	        that._renderItemData( ul, item );
+	      });
+	    }
+	  });
+	  </script>
+	  <script>
+	  $(function() {
+	    var availableTags = [
+		<?php echo $sugerencias; ?>
+	    ];
+ 
+	    $( "#titulo" ).catcomplete({
+	      delay: 500,
+	      source: 
+		  availableTags
+	    });
+	  });
+	  </script>
+
 </head>
 <body>
 
