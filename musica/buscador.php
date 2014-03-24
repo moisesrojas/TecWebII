@@ -1,7 +1,10 @@
 <?php
 include_once("includes/conexion.php");
 $palabra_clave = $_POST['titulo'];
-$query_busqueda = mysql_query("SELECT * FROM albums WHERE titulo LIKE '%".$palabra_clave."%'");
+$query_busqueda = mysql_query("SELECT titulo FROM albums
+	WHERE albums.titulo LIKE '%".$palabra_clave."%'
+	UNION SELECT nombre FROM generos
+	WHERE generos.nombre LIKE '%".$palabra_clave."%'");
 ?>
 
 <h3>Resultados de tu búsqueda</h3>
