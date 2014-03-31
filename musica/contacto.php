@@ -1,6 +1,6 @@
 <?php 
 $nombreErr = "";
-$nombre = ""; 
+$nombre = "";
 
 if (isset($_POST["submit"])){
 	

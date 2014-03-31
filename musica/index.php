@@ -42,6 +42,9 @@ for($i = 0;$i < $total_resultados; $i++){
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="css/magnific-popup.css"> 
+<script src="js/jquery.magnific-popup.js"></script> 
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -59,8 +62,12 @@ $(document).ready(function(){
 		});
 		
 	});
+	
+	$('.ajax-popup-link').magnificPopup({
+	  type: 'ajax'
+	});
+	
 });
-
 
 </script>
 
@@ -111,6 +118,16 @@ $(document).ready(function(){
 </form>
 
 <div id="resultado"></div>
+
+<div class="destacados">
+	<h3>Albums Destacados</h3>
+	<?php include_once("includes/destacados.php"); ?>
+</div>
+
+<div class="recientes">
+	<h3>Albums Recientes</h3>
+	<?php include_once("includes/recientes.php"); ?>
+</div>
 
 </body>
 </html>
