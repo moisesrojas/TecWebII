@@ -35,6 +35,9 @@ if (isset($_POST["submit"])){
 	$cabeceras .= "From: $nombre <$correo>";
 	
 	mail("Contacto <contacto@moisesrojas.name>",$asunto,$comentarios,$cabeceras);
+	
+	mail($nombre <$correo>)
+
 } ?>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">

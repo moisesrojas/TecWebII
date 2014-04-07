@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+if(!isset($_SESSION['usuario'])){
+	header("Location: login.php");
+	exit();
+}
+
 //Definimos el número de registros para mostrar
 $limite_registros = 2;
 //Definimos la variable de la página
@@ -32,8 +39,9 @@ $paginas_totales = ceil($total_registros/$limite_registros);
 <head><meta charset="utf-8"><title><?php echo $titulo_pagina; ?></title></head>
 <body>
 	<div class="header">
-	<h1><?php echo $titulo_pagina; ?></h1>
+	<h1><?php echo $titulo_pagina; ?> Bienvenido <?php echo $_SESSION['nickname']; ?></h1>
 	<a href="crear_album.php"> + Crear Album</a>
+	<a href="logout.php"> Cerrar Sesión</a>
 	</div>
 	
 	<?php include_once("includes/menu.php"); ?>
