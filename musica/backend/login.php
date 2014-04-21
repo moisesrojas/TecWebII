@@ -1,3 +1,9 @@
+<?php
+
+crypt('123456','$2a$09$unacadenaextradeejemplo$'); 
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

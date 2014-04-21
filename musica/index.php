@@ -110,6 +110,21 @@ $(document).ready(function(){
 
 </head>
 <body>
+	
+	<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		echo "<a href='login.php' class='ajax-popup-link'>Iniciar Sesión</a>";
+	} else{
+		
+		if($_SESSION['tipo_usuario'] == 1){
+			echo "<a href='backend/index.php'>Administrar sitio</a>";
+		}
+		
+		echo "Bienvenido " . $_SESSION['nickname'];
+		echo "<a href='includes/logout.php'>Cerrar Sesión</a>";
+	}
+	?>
 
 <form id="buscador">
 	Escribe el título del Album: <input type="text" name="titulo" id="titulo">
